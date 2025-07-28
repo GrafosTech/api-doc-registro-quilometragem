@@ -1,0 +1,29 @@
+
+# Pastas de configuração do Visual Studio
+.vs/
+*.user
+*.suo
+
+# Arquivos temporários do sistema
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# MacOS
+.DS_Store
+
+# Logs
+*.log
+
+# Pastas de cache
+node_modules/
+dist/
+build/
+
+# IDEs
+.idea/
+*.iml
+
+# Outras configurações locais
+.env
+*.local
