@@ -1,0 +1,82 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Grafos Tech - Importação de NF e Pedido",
+    "version": "v1",
+    "description": "Passo a passo para realizar o envio de uma NF / Pedido:<br/><br/>..."
+  },
+  "servers": [
+    {
+      "url": "https://container-app-prod-ms-backend.proudsand-a95781db.eastus.azurecontainerapps.io",
+      "description": "Prod"
+    },
+    {
+      "url": "https://api.grafostech.com.br",
+      "description": "Url Microservices"
+    }
+  ],
+  "paths": {
+    "/api/RegistroQuilometragem/GetByRota": {
+      "get": {
+        "tags": [
+          "RegistroQuilometragem"
+        ],
+        "parameters": [
+          {
+            "name": "idRota",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "idExterno",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Grafos.Backend.Contracts.Common.BaseResponse`1[[System.Collections.Generic.List`1[[Grafos.Backend.Domain.Models.Quilometragem.RegistroQuilometragem, Grafos.Backend.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Grafos.Backend.Contracts.Common.BaseResponse`1[[System.Collections.Generic.List`1[[Grafos.Backend.Domain.Models.Quilometragem.RegistroQuilometragem, Grafos.Backend.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Grafos.Backend.Contracts.Common.BaseResponse`1[[System.Collections.Generic.List`1[[Grafos.Backend.Domain.Models.Quilometragem.RegistroQuilometragem, Grafos.Backend.Domain, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {},
+    "securitySchemes": {
+      "Bearer": {
+        "type": "apiKey",
+        "description": "Inserir o token JWT com Bearer",
+        "name": "Authorization",
+        "in": "header"
+      }
+    }
+  },
+  "security": [
+    {
+      "Bearer": []
+    }
+  ]
+}
