@@ -20,7 +20,20 @@
         "summary": "Pega a URL do Backend para realizar as outras operações.",
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "URL retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "url": {
+                      "type": "string",
+                      "example": "https://api.grafostech.com.br"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -36,26 +49,21 @@
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "properties": {
-                  "usuario": {
-                    "type": "string"
-                  },
-                  "senha": {
-                    "type": "string"
-                  }
-                },
-                "required": [
-                  "usuario",
-                  "senha"
-                ]
+                "$ref": "#/components/schemas/LoginRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Token de autenticação retornado com sucesso"
+            "description": "Token de autenticação retornado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LoginResponse"
+                }
+              }
+            }
           },
           "401": {
             "description": "Não autorizado"
@@ -88,7 +96,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Lista de registros retornada com sucesso"
+            "description": "Lista de registros retornada com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/QuilometragemResponse"
+                }
+              }
+            }
           },
           "400": {
             "description": "Requisição inválida"
@@ -98,6 +113,64 @@
     }
   },
   "components": {
+    "schemas": {
+      "LoginRequest": {
+        "type": "object",
+        "properties": {
+          "usuario": {
+            "type": "string"
+          },
+          "senha": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "usuario",
+          "senha"
+        ]
+      },
+      "LoginResponse": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "example": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+          }
+        }
+      },
+      "RegistroQuilometragem": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "rotaId": {
+            "type": "integer"
+          },
+          "quilometragemInicial": {
+            "type": "number",
+            "format": "float"
+          },
+          "quilometragemFinal": {
+            "type": "number",
+            "format": "float"
+          },
+          "dataRegistro": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "observacoes": {
+            "type": "string"
+          }
+        }
+      },
+      "QuilometragemResponse": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/RegistroQuilometragem"
+        }
+      }
+    },
     "securitySchemes": {
       "Bearer": {
         "type": "apiKey",
